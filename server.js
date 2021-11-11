@@ -15,10 +15,13 @@ app.use(express.static('public'));
 
 app.use(require('./routes/index'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
+mongoose.connect(
+    process.envMONGODB_URI || 'mongodb://localhost/workout', {
     useNewUrlParser: true,
+    useFindAndModify: false,
     useUnifiedTopology: true,
-});
+    useCreateIndex: true
+  });
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`)
